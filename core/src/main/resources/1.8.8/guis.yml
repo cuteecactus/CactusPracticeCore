@@ -224,7 +224,7 @@ GUIS:
       TITLE: "&cSelect statistics to view"
       ICONS:
         FILLER-ITEM:
-          MATERIAL: BLACK_STAINED_GLASS_PANE
+          MATERIAL: STAINED_GLASS_PANE
         OWN-PLAYER-STATS:
           NAME: "&c%player% &7- &fStatistic"
           LORE:
