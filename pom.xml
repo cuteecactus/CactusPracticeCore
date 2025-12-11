@@ -6,7 +6,7 @@
 
     <groupId>dev.nandi0813</groupId>
     <artifactId>practice-parent</artifactId>
-    <version>6.20.1-SNAPSHOT</version>
+    <version>6.21-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>ZonePractice Pro</name>
@@ -71,11 +71,6 @@
         <repository>
             <id>codemc-snapshots</id>
             <url>https://repo.codemc.io/repository/maven-snapshots/</url>
-        </repository>
-
-        <repository>
-            <id>papermc</id>
-            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
     </repositories>
 
