@@ -6,7 +6,7 @@
 
     <groupId>dev.nandi0813</groupId>
     <artifactId>practice-parent</artifactId>
-    <version>6.21-SNAPSHOT</version>
+    <version>6.22-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>ZonePractice Pro</name>
@@ -51,10 +51,6 @@
         <repository>
             <id>papermc</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
-        </repository>
-        <repository>
-            <id>enginehub</id>
-            <url>https://maven.enginehub.org/repo/</url>
         </repository>
 
         <!-- PacketEvents -->
@@ -104,17 +100,5 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.intellectualsites.bom</groupId>
-                <artifactId>bom-newest</artifactId> <!--  Ref: https://github.com/IntellectualSites/bom -->
-                <version>1.49</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 </project>
