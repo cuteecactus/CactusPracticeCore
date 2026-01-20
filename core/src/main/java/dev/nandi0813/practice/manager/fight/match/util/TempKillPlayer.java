@@ -6,9 +6,10 @@ import dev.nandi0813.practice.manager.fight.match.Match;
 import dev.nandi0813.practice.manager.fight.match.Round;
 import dev.nandi0813.practice.manager.fight.match.enums.TeamEnum;
 import dev.nandi0813.practice.manager.fight.match.interfaces.Team;
+import dev.nandi0813.practice.manager.ladder.abstraction.Ladder;
+import dev.nandi0813.practice.manager.ladder.abstraction.interfaces.RespawnableLadder;
 import dev.nandi0813.practice.util.Common;
 import dev.nandi0813.practice.util.StringUtil;
-import dev.nandi0813.practice.util.fightmapchange.TempBlockChange;
 import dev.nandi0813.practice.util.playerutil.PlayerUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -44,24 +45,26 @@ public class TempKillPlayer extends BukkitRunnable {
         else
             playerTeam = TeamEnum.TEAM1;
 
-        switch (match.getLadder().getType()) {
-            case BEDWARS:
-                languagePath = "MATCH." + match.getType().getPathName() + ".LADDER-SPECIFIC.BED-WARS";
-                break;
-            case FIREBALL_FIGHT:
-                languagePath = "MATCH." + match.getType().getPathName() + ".LADDER-SPECIFIC.FIREBALL-FIGHT";
-                break;
-            case BATTLE_RUSH:
-                languagePath = "MATCH." + match.getType().getPathName() + ".LADDER-SPECIFIC.BATTLE-RUSH";
-                break;
-            case BRIDGES:
-                languagePath = "MATCH." + match.getType().getPathName() + ".LADDER-SPECIFIC.BRIDGES";
-                break;
-            default:
-                languagePath = null;
-        }
+        // Use the ladder's language path method
+        this.languagePath = resolveLanguagePath(match.getLadder());
 
         this.begin();
+    }
+
+    /**
+     * Resolves the language path for respawn messages from the ladder.
+     * Uses the RespawnableLadder interface.
+     */
+    private String resolveLanguagePath(Ladder ladder) {
+        String matchTypePath = "MATCH." + match.getType().getPathName() + ".LADDER-SPECIFIC.";
+
+        if (ladder instanceof RespawnableLadder respawnableLadder) {
+            String basePath = respawnableLadder.getRespawnLanguagePath();
+            if (basePath != null && !basePath.equals("MATCH.RESPAWN")) {
+                return matchTypePath + basePath;
+            }
+        }
+        return null;
     }
 
     public void begin() {
@@ -71,9 +74,9 @@ public class TempKillPlayer extends BukkitRunnable {
         /*
          * Battle rush remove blocks so the players don't get them unnecessarily
          */
-        for (TempBlockChange tempBlockChange : match.getFightChange().getTempBuildPlacedBlocks().values()) {
-            if (tempBlockChange.getPlayer().equals(player)) {
-                tempBlockChange.setReturnItem(false);
+        for (var entry : match.getFightChange().getBlocks().values()) {
+            if (entry.getTempData() != null && entry.getTempData().getPlayer().equals(player)) {
+                entry.getTempData().setReturnItem(false);
             }
         }
 

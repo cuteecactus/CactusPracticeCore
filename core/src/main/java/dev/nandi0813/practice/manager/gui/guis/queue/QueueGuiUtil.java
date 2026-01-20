@@ -6,6 +6,7 @@ import dev.nandi0813.practice.manager.leaderboard.Leaderboard;
 import dev.nandi0813.practice.manager.leaderboard.LeaderboardManager;
 import dev.nandi0813.practice.manager.leaderboard.types.LbMainType;
 import dev.nandi0813.practice.manager.leaderboard.types.LbSecondaryType;
+import dev.nandi0813.practice.manager.profile.Profile;
 import dev.nandi0813.practice.manager.profile.ProfileManager;
 import org.bukkit.OfflinePlayer;
 
@@ -60,7 +61,13 @@ public enum QueueGuiUtil {
         }
 
         OfflinePlayer player = players.get(placement - 1);
-        Division division = ProfileManager.getInstance().getProfile(player).getStats().getDivision();
+        Profile profile = ProfileManager.getInstance().getProfile(player);
+
+        Division division = null;
+        if (profile != null) {
+            division = profile.getStats().getDivision();
+        }
+        
         int score = leaderboard.getList().get(player);
 
         return format

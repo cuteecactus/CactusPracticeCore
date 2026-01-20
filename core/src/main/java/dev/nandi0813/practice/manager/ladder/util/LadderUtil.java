@@ -116,10 +116,12 @@ public enum LadderUtil {
 
         Bukkit.getScheduler().runTaskAsynchronously(ZonePractice.getInstance(), () ->
         {
+            /*
             for (Arena arena : ArenaManager.getInstance().getNormalArenas()) {
                 if (arena.getAssignedLadderTypes().contains(ladder.getType()))
                     arena.getAssignedLadders().add(ladder);
             }
+             */
 
             // Update ladder setup GUIs
             for (Map<GUIType, GUI> map : HologramSetupManager.getInstance().getHologramSetupGUIs().values())
@@ -140,8 +142,10 @@ public enum LadderUtil {
                 // Set the custom ladder kits
                 if (ladder.isEditable()) {
                     profile.getUnrankedCustomKits().put(ladder, new HashMap<>());
-                    if (ladder.isRanked())
+
+                    if (ladder.isRanked()) {
                         profile.getRankedCustomKits().put(ladder, new HashMap<>());
+                    }
                 }
             }
 

@@ -32,6 +32,39 @@ public abstract class GUI {
 
     public abstract void update();
 
+    /**
+     * Update with optional cache bypass.
+     * For cacheable GUIs, this checks cache validity first.
+     *
+     * @param forceRefresh If true, bypass cache and rebuild
+     */
+    public boolean update(boolean forceRefresh) {
+        // If this GUI type should be cached and we're not forcing refresh
+        if (!forceRefresh && GUICache.shouldCache(type)) {
+            // Check if we have valid cached data
+            if (GUICache.isCacheValid(type)) {
+                // Load from cache instead of rebuilding
+                Map<Integer, Inventory> cached = GUICache.getCached(type);
+                if (cached != null) {
+                    gui.clear();
+                    gui.putAll(cached);
+                    updatePlayers();
+                    return false;
+                }
+            }
+        }
+
+        // Either not cacheable, cache expired, or force refresh requested
+        update();
+
+        // After update, cache if this is a cacheable GUI type
+        if (GUICache.shouldCache(type)) {
+            GUICache.putCache(type, gui);
+        }
+
+        return true;
+    }
+
     public void open(Player player, int page) {
         inConfirmationGui.remove(player);
 

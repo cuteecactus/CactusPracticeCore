@@ -2,24 +2,22 @@ package dev.nandi0813.practice.manager.gui.guis.leaderboard;
 
 import dev.nandi0813.practice.ZonePractice;
 import dev.nandi0813.practice.manager.backend.GUIFile;
-import dev.nandi0813.practice.manager.backend.LanguageManager;
 import dev.nandi0813.practice.manager.fight.match.enums.MatchType;
 import dev.nandi0813.practice.manager.gui.GUI;
+import dev.nandi0813.practice.manager.gui.GUICache;
 import dev.nandi0813.practice.manager.gui.GUIManager;
 import dev.nandi0813.practice.manager.gui.GUIType;
 import dev.nandi0813.practice.manager.ladder.LadderManager;
 import dev.nandi0813.practice.manager.ladder.abstraction.normal.NormalLadder;
-import dev.nandi0813.practice.util.Common;
 import dev.nandi0813.practice.util.InventoryUtil;
-import dev.nandi0813.practice.util.StringUtil;
-import dev.nandi0813.practice.util.cooldown.CooldownObject;
-import dev.nandi0813.practice.util.cooldown.PlayerCooldown;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Map;
 
 public class LbWinGui extends GUI {
 
@@ -35,7 +33,8 @@ public class LbWinGui extends GUI {
 
     @Override
     public void build() {
-        update();
+        // Use cache-aware update
+        update(false);
     }
 
     @Override
@@ -64,10 +63,31 @@ public class LbWinGui extends GUI {
 
             inventory.setItem(45, GUIFile.getGuiItem("GUIS.STATISTICS.WIN-LEADERBOARD.ICONS.BACK-TO-HUB").get());
             inventory.setItem(49, LbGuiUtil.createGlobalWinLb());
-            inventory.setItem(53, LbGuiUtil.getRefreshItem());
+            inventory.setItem(53, LbGuiUtil.getCacheInfoItem());
 
             updatePlayers();
+
+            // Cache the result after building
+            if (GUICache.shouldCache(type)) {
+                GUICache.putCache(type, gui);
+            }
         });
+    }
+
+    @Override
+    public void open(Player player, int page) {
+        // Try to load from cache first before opening
+        if (GUICache.shouldCache(type) && GUICache.isCacheValid(type)) {
+            Map<Integer, Inventory> cached = GUICache.getCached(type);
+            if (cached != null) {
+                gui.clear();
+                gui.putAll(cached);
+            }
+        } else {
+            update();
+        }
+
+        super.open(player, page);
     }
 
     @Override
@@ -80,14 +100,6 @@ public class LbWinGui extends GUI {
         if (slot == 45) {
             if (backTo != null) backTo.open(player);
             else player.closeInventory();
-        } else if (slot == 53) {
-            if (PlayerCooldown.isActive(player, CooldownObject.LEADERBOARD_GUI_REFRESH)) {
-                Common.sendMMMessage(player, StringUtil.replaceSecondString(LanguageManager.getString("LEADERBOARD.REFRESH-COOLDOWN"), PlayerCooldown.getLeftInDouble(player, CooldownObject.LEADERBOARD_GUI_REFRESH)));
-                return;
-            }
-
-            update();
-            PlayerCooldown.addCooldown(player, CooldownObject.LEADERBOARD_GUI_REFRESH, 30);
         }
     }
 
