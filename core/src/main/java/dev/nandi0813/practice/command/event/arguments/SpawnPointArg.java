@@ -16,19 +16,19 @@ public enum SpawnPointArg {
                     case "add":
                         eventData.addSpawn(player.getLocation());
                         Common.sendMMMessage(player, LanguageManager.getString("COMMAND.EVENT.ARGUMENTS.SPAWN-POSITION.SPAWN-ADDED")
-                                .replace("%event%", eventData.getType().getName())
+                                .replace("%event%", eventData.getType().name())
                                 .replace("%posCount%", String.valueOf(eventData.getSpawns().size())));
                         break;
                     case "remove":
                         eventData.removeSpawn(player.getLocation());
                         Common.sendMMMessage(player, LanguageManager.getString("COMMAND.EVENT.ARGUMENTS.SPAWN-POSITION.SPAWN-REMOVED")
-                                .replace("%event%", eventData.getType().getName())
+                                .replace("%event%", eventData.getType().name())
                                 .replace("%posCount%", String.valueOf(eventData.getSpawns().size())));
                         break;
                     case "clear":
                         eventData.clearSpawn();
                         Common.sendMMMessage(player, LanguageManager.getString("COMMAND.EVENT.ARGUMENTS.SPAWN-POSITION.SPAWN-CLEARED")
-                                .replace("%event%", eventData.getType().getName()));
+                                .replace("%event%", eventData.getType().name()));
                         break;
                     case "list":
                         if (eventData.getSpawns().isEmpty()) {
@@ -51,18 +51,8 @@ public enum SpawnPointArg {
             } catch (Exception e) {
                 Common.sendMMMessage(player, "<red>" + e.getMessage());
             }
-        } else {
-            sendHelp(player, label1, eventData);
         }
-    }
-
-    private static void sendHelp(Player player, String label, EventData eventData) {
-        for (String line : LanguageManager.getList("COMMAND.EVENT.ARGUMENTS.SPAWN-POSITION.COMMAND-HELP")) {
-            Common.sendMMMessage(player, line
-                    .replace("%label%", label)
-                    .replace("%event%", eventData.getType().getName().toLowerCase())
-            );
-        }
+        // No help message - spawn commands work silently or show error
     }
 
 }

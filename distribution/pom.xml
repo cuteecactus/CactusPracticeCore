@@ -10,7 +10,7 @@
     <parent>
         <groupId>dev.nandi0813</groupId>
         <artifactId>practice-parent</artifactId>
-        <version>6.4.1-SNAPSHOT</version>
+        <version>6.4.2-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -46,7 +46,7 @@
 
     <build>
         <defaultGoal>clean install</defaultGoal>
-        <finalName>ZonePractice Pro v6.4.1-SNAPSHOT</finalName>
+        <finalName>ZonePractice Pro v6.4.2-SNAPSHOT</finalName>
 
         <plugins>
             <plugin>
@@ -95,6 +95,19 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.42</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -106,7 +119,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>copy-jar-to-test-servers</id>

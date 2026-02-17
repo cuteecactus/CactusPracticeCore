@@ -89,7 +89,9 @@ public class LeaderboardManager implements Listener {
 
         createLB(mainType, secondaryType, ladder, list ->
         {
-            if (list == null) return;
+            if (list == null) {
+                return;
+            }
 
             Leaderboard leaderboard = searchLB(mainType, secondaryType, ladder);
             if (leaderboard != null) {
@@ -98,6 +100,16 @@ public class LeaderboardManager implements Listener {
                 leaderboard = new Leaderboard(mainType, secondaryType, ladder, list);
                 leaderboards.add(leaderboard);
             }
+
+            // NOTE: We do NOT trigger immediate hologram updates here anymore.
+            // The HologramRunnable handles periodic updates on its own timer.
+            // Triggering updates here was causing:
+            // 1. Race conditions with multiple leaderboard updates happening simultaneously
+            // 2. Excessive calls to getNextLeaderboard() which was rotating dynamic hologram ladders
+            // 3. Holograms flickering/disappearing due to overlapping update cycles
+            //
+            // Holograms will show updated data on their next scheduled update cycle,
+            // which is typically within a few seconds (configurable).
         });
     }
 

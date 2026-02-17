@@ -212,17 +212,27 @@ public abstract class Event implements Spectatable, dev.nandi0813.api.Interface.
             sendMessage(LanguageManager.getString("COMMAND.STAFF.ARGUMENTS.FORCE-END.EVENT.MATCH-END-MSG").replace("%player%", player.getName()), true);
         }
 
-        if (!this.status.equals(EventStatus.COLLECTING)) {
-            this.endEvent();
-        } else {
-            this.removeAll();
-        }
+        // Store current status before changing it
+        boolean wasLive = !this.status.equals(EventStatus.COLLECTING);
 
+        // Cancel all runnables first to prevent interference
         this.cancelAllRunnable();
+
+        // Remove all players and spectators
+        this.removeAll();
+
+        // Set status to END
         this.status = EventStatus.END;
 
+        // Rollback fight changes if event was live
+        if (wasLive) {
+            this.getFightChange().rollback(100, 50);
+        }
+
+        // Remove from event manager
         EventManager.getInstance().getEvents().remove(this);
 
+        // Update spectator GUI
         SpectatorManager.getInstance().getSpectatorMenuGui().update();
     }
 
@@ -267,7 +277,7 @@ public abstract class Event implements Spectatable, dev.nandi0813.api.Interface.
     @Override
     public GUIItem getSpectatorMenuItem() {
         return GUIFile.getGuiItem("GUIS.SPECTATOR-MENU.ICONS.EVENT-ICON")
-                .setMaterial(type.getIcon().getType()).setDamage(type.getIcon().getDurability()).replace("%event_type%", type.getName())
+                .setMaterial(eventData.getIcon().getMaterial()).setDamage(eventData.getIcon().getDamage()).replace("%event_type%", type.getName())
                 .replace("%event_duration%", this.getDurationRunnable().getFormattedTime())
                 .replace("%players%", String.valueOf(players.size())).replace("%spectators%", String.valueOf(spectators.size()));
 

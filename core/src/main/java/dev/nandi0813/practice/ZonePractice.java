@@ -146,6 +146,7 @@ public final class ZonePractice extends JavaPlugin {
                     LadderManager.getInstance().loadGUIs();
 
                     HologramManager.getInstance().loadHolograms();
+                    dev.nandi0813.practice.manager.leaderboard.hologram.HologramProtectionListener.register();
                     startUpProgress.replace(StartUpTypes.HOLOGRAM_LOADING, true);
 
                     SidebarManager.getInstance().load();
@@ -179,9 +180,12 @@ public final class ZonePractice extends JavaPlugin {
         // Clear all spawn markers to prevent them persisting after server restart
         SpawnMarkerManager.getInstance().clearAllMarkers();
 
+        // Clear all event spawn markers
+        dev.nandi0813.practice.manager.fight.event.setup.EventSpawnMarkerManager.getInstance().clearAllMarkers();
+
         MatchManager.getInstance().endMatches();
         FFAManager.getInstance().endFFAs();
-        HologramManager.getInstance().saveHolograms();
+        HologramManager.getInstance().saveAndDespawnHolograms(); // Use saveAndDespawn for shutdown to clean up armor stands
         EventManager.getInstance().endEvents();
         EventManager.getInstance().saveEventData();
         ArenaManager.getInstance().saveArenas();
