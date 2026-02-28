@@ -20,6 +20,12 @@ public class ChangedBlock extends dev.nandi0813.practice.module.interfaces.Chang
         this.materialData = oldBlock.getState().getData();
     }
 
+    public ChangedBlock(final Block oldBlock, final Material originalMaterial) {
+        super(oldBlock, originalMaterial);
+        // Block is already AIR/changed; use the default MaterialData for the original material
+        this.materialData = new org.bukkit.material.MaterialData(originalMaterial);
+    }
+
     public ChangedBlock(final BlockPlaceEvent e) {
         super(e);
         this.materialData = e.getBlockReplacedState().getData();
@@ -60,10 +66,14 @@ public class ChangedBlock extends dev.nandi0813.practice.module.interfaces.Chang
         }
 
         try {
+            // Capture a single BlockState snapshot and apply all mutations to it before
+            // committing — calling block.getState() multiple times returns independent
+            // snapshots, so setData() on one has no effect on another's update() call.
             block.setType(material);
-            block.getState().setType(material);
-            block.getState().setData(materialData);
-            block.getState().update(false);
+            org.bukkit.block.BlockState state = block.getState();
+            state.setType(material);
+            state.setData(materialData);
+            state.update(true, false);
 
             if (chestInventory != null && block.getState() instanceof Chest) {
                 Chest chest = (Chest) block.getState();
@@ -71,10 +81,11 @@ public class ChangedBlock extends dev.nandi0813.practice.module.interfaces.Chang
             }
         } catch (IllegalArgumentException e) {
             // Handle MaterialData type incompatibilities (e.g., Tree, Torch)
-            // Just set the block type without the problematic material data
+            // Fall back to setting the material only, without custom MaterialData
             block.setType(material);
-            block.getState().setType(material);
-            block.getState().update(false);
+            org.bukkit.block.BlockState state = block.getState();
+            state.setType(material);
+            state.update(true, false);
         }
     }
 

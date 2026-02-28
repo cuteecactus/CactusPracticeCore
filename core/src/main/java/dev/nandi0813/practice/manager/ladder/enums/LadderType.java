@@ -99,7 +99,8 @@ public enum LadderType {
                     SettingType.WEIGHT_CLASS,
                     SettingType.ROUNDS,
                     SettingType.MAX_DURATION,
-                    SettingType.START_COUNTDOWN
+                    SettingType.START_COUNTDOWN,
+                    SettingType.SPLEEF_SNOWBALL_MODE
             )
     ),
 
@@ -161,6 +162,7 @@ public enum LadderType {
             .withCommonSettings()
             .withPearlSettings()
             .withBuildSettings()
+            .withSetting(SettingType.RESET_BUILD_AFTER_ROUND)
     ),
 
     BATTLE_RUSH(LadderTypeConfig.builder(

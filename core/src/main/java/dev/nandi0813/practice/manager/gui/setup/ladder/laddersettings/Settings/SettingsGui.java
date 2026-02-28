@@ -205,6 +205,15 @@ public class SettingsGui extends GUI {
 
         if (settingTypes.contains(SettingType.HEALTH_BELOW_NAME))
             settingItems.add(new HealthBelowNameItem(this, ladder));
+
+        if (settingTypes.contains(SettingType.RESET_BUILD_AFTER_ROUND))
+            settingItems.add(new ResetBuildAfterRoundItem(this, ladder));
+
+        if (settingTypes.contains(SettingType.BREAK_ALL_BLOCKS))
+            settingItems.add(new BreakAllBlocksItem(this, ladder));
+
+        if (settingTypes.contains(SettingType.SPLEEF_SNOWBALL_MODE))
+            settingItems.add(new SpleefSnowballModeItem(this, (dev.nandi0813.practice.manager.ladder.type.Spleef) ladder));
     }
 
 }

@@ -35,8 +35,16 @@ public enum Common {
     }
 
     public static void sendMMMessage(Player player, String line) {
+        if (line == null) {
+            return;
+        }
+
         if (line.contains("&") || line.contains("§")) {
             line = StringUtil.legacyColorToMiniMessage(line);
+        }
+
+        if (line.isEmpty()) {
+            return;
         }
 
         if (SoftDependUtil.isPAPI_ENABLED) {

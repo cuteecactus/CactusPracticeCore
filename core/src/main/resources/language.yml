@@ -1,4 +1,4 @@
-VERSION: 13
+VERSION: 16
 
 CONSOLE-NAME: "<red>Console"
 CANT-USE-CONSOLE: "<red>You can't use this command from the console."
@@ -221,6 +221,7 @@ COMMAND:
         NOT-IN-REGION: "<red>The portal must be in the arena world inside the arenas cube."
         INVALID-NUMBER: "<red>Invalid team number!"
         PORTAL-OVERLAP: "<red>Portals cannot overlap with X and Z coordinates."
+        TOO-LOW-FOR-FLOOR: "<red>The portal must be at least 1 block above the %floor_type% (Y: <yellow>%floor_y%<red>)."
         SET-PORTAL1: "<green>You set the first portal location for the arena %arena%"
         SET-PORTAL2: "<green>You set the second portal location for the arena %arena%"
       PORTAL-PROTECTION:
@@ -881,7 +882,6 @@ COMMAND:
       HOLOGRAM-DELETED: "<green>You successfully deleted hologram <yellow>%hologram%<green>."
     SERVER:
       WAIT-BEFORE: "<red>Please wait before using this again."
-      RELOAD-SERVER-FILES: "<yellow>You reloaded the server files."
       SAVED-ALL-FILES: "<yellow>You saved all the server data."
       ENDED-EVENT: "<yellow>You ended the event <red>%event%<yellow>."
       MATCH-ENDED: "<red>The match has been ended by a moderator."
@@ -1215,7 +1215,6 @@ EVENT:
     POSITION-MARKERS-DELETED: "<red>The position markers have been deleted!"
     ALREADY-SCANNING: "<red>The <yellow>%event% <red>event's map is already being scanned."
     ENDERPEARL-COOLDOWN: "<red>You cannot use this for another <yellow>%seconds% <red>%secondName%."
-    FIREWORK-ROCKET-COOLDOWN: "<red>You cannot use firework rockets for another <yellow>%seconds% <red>%secondName%."
 PARTY:
   NO-PERMISSION: "<red>You don't have permission."
   ALREADY-PARTY: "<red>You are already in a different party."
@@ -1329,6 +1328,7 @@ MATCH:
     ENDER-PEARL: "<red>You cannot use this for another <yellow>%seconds% <red>%secondName%."
     GOLDEN-APPLE: "<red>You cannot eat another <gold>golden apple</gold> for another <yellow>%seconds% <red>%secondName%."
     FIREBALL: "<red>You cannot throw another fireball for another <yellow>%seconds% <red>%secondName%."
+    FIREWORK-ROCKET-COOLDOWN: "<red>You cannot use firework rockets for another <yellow>%seconds% <red>%secondName%."
   CANT-BUILD-OUTSIDE-ARENA: "<red>You can't build outside the arena."
   CANT-BUILD-OVER-LIMIT: "<red>You can't build there."
   CANT-CRAFT: "<red>You can't craft with this ladder."
@@ -1339,6 +1339,7 @@ MATCH:
   ONLY-CHARGE-WIND: "<red>You can only use wind charge in build ladders."
   REACHED-NEW-DIVISION: "<green>Congratulations! <yellow>You have reached %newDivision_fullName% <yellow>division." # %oldDivision_fullName% & %newDivision_fullName%
   MATCH-OVER-IN-30: "<yellow>Match is over in <red>30 <yellow>seconds."
+  ARENA-ROLLING-BACK: "<yellow>Rolling back arena... <gray>Waiting for next round to start."
   REMATCH-REQUEST:
     TARGET-OFFLINE: "<red>%target% has left the server."
     ALREADY-SENT: "<red>The rematch request has already been sent out."
@@ -1620,6 +1621,7 @@ FFA:
 FIGHT:
   DEATH-MESSAGES:
     VOID: "<red>%player% <yellow>fell into the void."
+    VOID-BY-PLAYER: "<red>%player% <yellow>was knocked into the void by <gold>%killer%<yellow>."
     WATER: "<red>%player% <yellow>drowned."
     LAVA: "<red>%player% <yellow>burned in lava."
     FIRE: "<red>%player% <yellow>burned to death."
