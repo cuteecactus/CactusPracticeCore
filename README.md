@@ -1,13 +1,13 @@
-# ZonePractice
-
-ZonePractice is a modular, production-ready Minecraft PvP/practice plugin written in Java and built with Maven. It is
+# CactusPracticeCore
+s
+CactusPracticeCore is a modular, production-ready Minecraft PvP/practice plugin written in Java and built with Maven. It is
 organized into multiple modules (core logic, platform-specific builds, and distribution packaging) and supports all
 major server forks commonly used by competitive PvP networks.
 
 ## Documentation
 
 For detailed guides on setup, configuration, and feature usage, please visit our official GitBook:
-👉 **[ZonePractice Pro Documentation](https://zone-developement.gitbook.io/zonepractice-pro/)**
+👉 **[CactusPracticeCore Pro Documentation](https://zone-developement.gitbook.io/zonepractice-pro/)**
 
 ## Features
 
@@ -32,15 +32,15 @@ integration.
 
 ### Required (runtime) – PacketEvents
 
-ZonePractice uses PacketEvents for packet-level features. PacketEvents must be installed as an external plugin, not
-shaded into ZonePractice.  
+CactusPracticeCore uses PacketEvents for packet-level features. PacketEvents must be installed as an external plugin, not
+shaded into CactusPracticeCore.  
 **How to install PacketEvents:**
 
 1. Download a compatible build from: https://github.com/retrooper/packetevents/releases
 2. Stop your server
-3. Place **PacketEvents** and **ZonePractice** into the *plugins/* directory
-4. Start the server and ensure PacketEvents loads before ZonePractice  
-   Do **not** bundle PacketEvents inside the ZonePractice jar. Keeping it external ensures correct load order and
+3. Place **PacketEvents** and **CactusPracticeCore** into the *plugins/* directory
+4. Start the server and ensure PacketEvents loads before CactusPracticeCore  
+   Do **not** bundle PacketEvents inside the CactusPracticeCore jar. Keeping it external ensures correct load order and
    compatibility.
 
 ## Repository Structure
@@ -48,7 +48,7 @@ shaded into ZonePractice.
 - **core/** – main logic and shared systems (`practice-core-*.jar`)
 - **spigot_1_8_8/** – legacy 1.8.8 platform build
 - **spigot_modern/** – modern 1.20.x / 1.21.x builds
-- **distribution/** – release packaging (`ZonePractice Pro v*.jar`)
+- **distribution/** – release packaging (`CactusPracticeCore Pro v*.jar`)
 - **libs/** – helper jars and forked server builds for development
 
 ---
@@ -88,7 +88,7 @@ system before cloning or pulling updates:
 
 1. Place the appropriate build (distribution jar or a specific platform module) into *plugins/*.
 2. Start the server and watch the console or `logs/latest.log`.
-3. On first startup, the plugin will generate configuration files under `plugins/ZonePracticePro/`.
+3. On first startup, the plugin will generate configuration files under `plugins/CactusPracticeCorePro/`.
 
 ## Configuration
 
@@ -103,7 +103,7 @@ system before cloning or pulling updates:
 ## Commands & Permissions
 
 All commands and permission nodes are defined in `core/src/main/resources/plugin.yml`.  
-Common commands include `/practice` (aliases: `/prac`, `/zonepractice`, `/zoneprac`, `/zonep`), `/arena`, `/ladder`,
+Common commands include `/practice` (aliases: `/prac`, `/CactusPracticeCore`, `/zoneprac`, `/zonep`), `/arena`, `/ladder`,
 `/duel`, `/party`, `/spectate`, and many more.  
 Permissions follow the `zpp.*` namespace, such as `zpp.admin` (default: op), `zpp.practice.*`, `zpp.staffmode`, and many
 granular nodes.
@@ -120,7 +120,7 @@ Defined in `plugin.yml`:
 
 ### PacketEvents Not Found
 
-- Ensure PacketEvents is in *plugins/* and loads **before** ZonePractice
+- Ensure PacketEvents is in *plugins/* and loads **before** CactusPracticeCore
 - Restart the server instead of hot-loading plugins
 
 ### MySQL Errors
@@ -132,7 +132,7 @@ Defined in `plugin.yml`:
 ## Plugin Metadata
 
 The canonical `plugin.yml` is located at `core/src/main/resources/plugin.yml` and defines:  
-`name: ZonePracticePro`, `api-version: 1.13`, commands, permissions, soft dependencies, and load rules.
+`name: CactusPracticeCorePro`, `api-version: 1.13`, commands, permissions, soft dependencies, and load rules.
 
 ## Contributing
 
@@ -144,7 +144,7 @@ The canonical `plugin.yml` is located at `core/src/main/resources/plugin.yml` an
 ## License
 
 Licensed under the **MIT License (2025)**.  
-Copyright © **ZonePractice contributors**
+Copyright © **CactusPracticeCore contributors**
 
 ## Contact
 
