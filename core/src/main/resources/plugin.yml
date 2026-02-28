@@ -1,4 +1,4 @@
-name: ZonePracticePro
+name: CactusCore
 version: '${project.version}'
 main: dev.nandi0813.practice.ZonePractice
 authors: [ Nandi0813 ]
@@ -8,8 +8,8 @@ api-version: 1.13
 commands:
   arena:
     description: Arena command
-  ladder:
-    description: Ladder command
+  kit:
+    description: Kit command
   setup:
     description: Setup command
   duel:

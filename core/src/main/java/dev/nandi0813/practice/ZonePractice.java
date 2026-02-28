@@ -236,9 +236,9 @@ public final class ZonePractice extends JavaPlugin {
         }
 
         LadderCommand ladderCommand = new LadderCommand();
-        if (server.getPluginCommand("ladder") != null) {
-            server.getPluginCommand("ladder").setExecutor(ladderCommand);
-            server.getPluginCommand("ladder").setTabCompleter(ladderCommand);
+        if (server.getPluginCommand("kit") != null) {
+            server.getPluginCommand("kit").setExecutor(ladderCommand);
+            server.getPluginCommand("kit").setTabCompleter(ladderCommand);
         }
 
         MatchStatsCommand matchStatsCommand = new MatchStatsCommand();
