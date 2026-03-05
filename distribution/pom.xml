@@ -10,7 +10,7 @@
     <parent>
         <groupId>dev.nandi0813</groupId>
         <artifactId>practice-parent</artifactId>
-        <version>6.4.4-SNAPSHOT</version>
+        <version>6.4.5-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -46,7 +46,7 @@
 
     <build>
         <defaultGoal>clean install</defaultGoal>
-        <finalName>ZonePractice Pro v6.4.4-SNAPSHOT</finalName>
+        <finalName>ZonePractice Pro v6.4.5-SNAPSHOT</finalName>
 
         <plugins>
             <plugin>
@@ -131,11 +131,11 @@
                                         <echo message="Copying plugins for the test servers..." />
 
                                         <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                              tofile="${server.path.old}/plugins/ZPP.jar"
+                                              tofile="${server.path.old}/plugins/ZonePracticePro.jar"
                                               overwrite="true" failonerror="false" />
 
                                         <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                              tofile="${server.path.modern}/plugins/ZPP.jar"
+                                              tofile="${server.path.modern}/plugins/ZonePracticePro.jar"
                                               overwrite="true" failonerror="false" />
                                     </target>
                                 </configuration>

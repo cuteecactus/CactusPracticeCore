@@ -3,6 +3,7 @@ package dev.nandi0813.practice_modern;
 import dev.nandi0813.practice.ZonePractice;
 import dev.nandi0813.practice.module.interfaces.*;
 import dev.nandi0813.practice_modern.interfaces.BuildListener;
+import dev.nandi0813.practice_modern.interfaces.ModernItemCooldownHandler;
 import dev.nandi0813.practice_modern.interfaces.PlayerHiderUtil;
 import dev.nandi0813.practice_modern.listener.*;
 import dev.nandi0813.practice_modern.modern_version.ItemOffHand;
@@ -31,6 +32,8 @@ public class Classes implements dev.nandi0813.practice.module.util.Classes {
     public Class<?> kitDataClass = dev.nandi0813.practice_modern.interfaces.KitData.class;
     public Class<?> actionBarClass = dev.nandi0813.practice_modern.interfaces.ActionBar.class;
 
+    public ItemCooldownHandler itemCooldownHandler = new ModernItemCooldownHandler();
+
     public Classes() {
         Bukkit.getServer().getPluginManager().registerEvents(arenaCopyUtil, ZonePractice.getInstance());
         Bukkit.getServer().getPluginManager().registerEvents(statisticListener, ZonePractice.getInstance());
@@ -43,6 +46,7 @@ public class Classes implements dev.nandi0813.practice.module.util.Classes {
 
         Bukkit.getServer().getPluginManager().registerEvents(new EPCountdownListener(), ZonePractice.getInstance());
         Bukkit.getServer().getPluginManager().registerEvents(new FireworkRocketCooldownListener(), ZonePractice.getInstance());
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerChatListener(), ZonePractice.getInstance());
     }
 
 }
