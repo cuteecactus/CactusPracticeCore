@@ -47,6 +47,7 @@ import dev.nandi0813.practice.manager.sidebar.SidebarManager;
 import dev.nandi0813.practice.module.util.ClassImport;
 import dev.nandi0813.practice.module.util.VersionChecker;
 import dev.nandi0813.practice.util.*;
+import dev.nandi0813.practice.util.UpdateChecker;
 import dev.nandi0813.practice.util.placeholderapi.PlayerExpansion;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import lombok.Getter;
@@ -94,7 +95,7 @@ public final class ZonePractice extends JavaPlugin {
         metrics = new Metrics(this, 16055);
 
         if (VersionChecker.getBukkitVersion() == null) {
-            Common.sendConsoleMMMessage("<red>Unsupported server version! Please use 1.8.8 or 1.8.9 or 1.20.6 or 1.21.4");
+            Common.sendConsoleMMMessage("<red>Unsupported server version! Please use 1.8.8 or 1.8.9 or 1.20.6 or 1.21.X");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
@@ -158,6 +159,9 @@ public final class ZonePractice extends JavaPlugin {
 
                     // Mark plugin as fully loaded
                     fullyLoaded = true;
+
+                    // Check for updates asynchronously and log to console
+                    UpdateChecker.checkAsync(ZonePractice.this);
                 });
             });
         });
@@ -361,7 +365,6 @@ public final class ZonePractice extends JavaPlugin {
         pm.registerEvents(new ItemConsume(), this);
         pm.registerEvents(new ProjectileLaunch(), this);
         pm.registerEvents(new PlayerCommandPreprocess(), this);
-        pm.registerEvents(new PlayerChat(), this);
         pm.registerEvents(new EntityDamage(), this);
         pm.registerEvents(new ArenaListener(), this);
     }

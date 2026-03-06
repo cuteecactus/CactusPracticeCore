@@ -1,4 +1,4 @@
-VERSION: 14
+VERSION: 15
 
 # Mysql database setup.
 MYSQL-DATABASE:
@@ -311,6 +311,16 @@ SOUNDS:
     SOUND: ITEM_TOTEM_USE
     VOLUME: 1
     PITCH: 1
+  EVENT_QUEUE_COUNTDOWN:
+    ENABLED: true
+    SOUND: BLOCK_NOTE_BLOCK_PLING
+    VOLUME: 1
+    PITCH: 1
+  EVENT_START_COUNTDOWN:
+    ENABLED: true
+    SOUND: BLOCK_NOTE_BLOCK_PLING
+    VOLUME: 1
+    PITCH: 1
 #
 # Leaderboard settings
 LEADERBOARD:
@@ -493,6 +503,8 @@ PLAYER:
   SETTINGS-DELAY: 3 # Sec between settings can be changed. It can be bypassed.
   LOBBY-NAMETAG:
     ENABLED: true
+  NAMETAG-MANAGEMENT:
+    ENABLED: true # If false, ZonePractice will not manage nametags (above-head prefix/suffix/color) or the tab-list at all.
   JOIN-TELEPORT-LOBBY: true # If true, the player will be teleported to the lobby when they join the server.
   GROUP-CHAT:
     ENABLED: true # If enabled, the player's chat will be formatted by their group. It is only viable if "SERVER-CHAT" is also enabled.
